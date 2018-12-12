@@ -10,7 +10,9 @@ app.get('/mean', function(request, response, next) {
   let nums = getNumberArrayFromQuery(request.query);
   let numResult = getSumFromArray(nums) / nums.length;
   let responseString = `The mean of ${nums.join(', ')} is ${numResult}`;
-  writeResult(responseString.concat('\n'));
+  if (request.query.save.toLowerCase() !== 'false') {
+    writeResult(responseString.concat('\n'));
+  }
   return response.json(responseString);
 });
 
@@ -27,7 +29,9 @@ app.get('/median', function(request, response, next) {
     var numResult = medianNumbers.reduce((acc, next) => acc + next / 2, 0);
   }
   let responseString = `The median of ${nums.join(', ')} is ${numResult}`;
-  writeResult(responseString.concat('\n'));
+  if (request.query.save.toLowerCase() !== 'false') {
+    writeResult(responseString.concat('\n'));
+  }
   return response.json(responseString);
 });
 
@@ -37,7 +41,9 @@ app.get('/mode', function(request, response, next) {
   let nums = getNumberArrayFromQuery(request.query);
   let numResult = findMode(request.query.nums);
   let responseString = `The mode of ${nums.join(', ')} is ${numResult}`;
-  writeResult(responseString.concat('\n'));
+  if (request.query.save.toLowerCase() !== 'false') {
+    writeResult(responseString.concat('\n'));
+  }
   return response.json(responseString);
 });
 
